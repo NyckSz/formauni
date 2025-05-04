@@ -1,0 +1,37 @@
+<ion-content class="ion-padding">
+
+  <ion-item lines="full">
+    <ion-label>Escolha a cidade</ion-label>
+    <ion-select [(ngModel)]="cidade" (ionChange)="buscarCidade()">
+      <ion-select-option *ngIf="favorita" [value]="favorita">⭐ {{ favorita }}</ion-select-option>
+      <ion-select-option *ngFor="let c of cidades" [value]="c">{{ c }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-button expand="block" class="ion-margin-top" (click)="buscarCidade()">
+    Ver Clima
+  </ion-button>
+
+  <ion-button expand="block" fill="outline" color="warning" (click)="favoritarCidade()">
+    <ion-icon name="star-outline" slot="start"></ion-icon>
+    Favoritar "{{ cidade }}"
+  </ion-button>
+
+  <div *ngIf="carregando" class="ion-text-center ion-margin-top">
+    <ion-spinner name="crescent"></ion-spinner>
+    <p>Carregando clima...</p>
+  </div>
+
+  <div *ngIf="!carregando && clima" class="ion-text-center">
+    <h2>{{ clima.location.name }}, {{ clima.location.region }}</h2>
+    <p><strong>Temperatura:</strong> {{ clima.current.temp_c }} °C</p>
+    <p><strong>Condição:</strong> {{ clima.current.condition.text }}</p>
+    <img [src]="'https:' + clima.current.condition.icon" />
+  </div>
+  <ion-button expand="block" routerLink="/home" color="primary"> 
+    Voltar ao home 
+  </ion-button>
+  <ion-button expand="block" routerLink="/segundatela" color="primary"> 
+    Como usar
+  </ion-button>
+</ion-content>

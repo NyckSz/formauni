@@ -1,0 +1,7 @@
+{
+  "name": "formauni",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
